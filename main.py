@@ -1,7 +1,9 @@
 from dziecko import Dziecko
 
+dziecko = Dziecko('d','d','d')
+
 while True:
-    print ("""Witaj w Kontrolerze Wzrostu Dziecka!
+    print ("""\n Witaj w Kontrolerze Wzrostu Dziecka!
            Wybierz opcję z poniższego menu: 
                 1 - Dodaj dziecko
                 2 - Moje dzieci
@@ -9,9 +11,10 @@ while True:
            Wybieram:        """)
     wybor = input()
     if wybor == "1":
-        Dziecko.dodaj_dziecko()
+        dziecko.utwórz_dziecko()
+        dziecko.dodaj_dziecko()
     elif wybor == "2":
-        print("Moje dzieci")
+        print(f"Moje dzieci to: {dziecko.wyswietl_dzieci()}")
     elif wybor == "3":
         break
     else:
