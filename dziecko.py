@@ -23,6 +23,17 @@ class Dziecko:
         while True:
             try:
                 data_urodzenia = datetime.datetime.strptime(data_urodzenia, '%d-%m-%Y')
+                #obecna_data = datetime.datetime.now()
+                #obecna_data = str(obecna_data)
+                #obecna_data = datetime.datetime.strptime(obecna_data, '%d-%m-%Y')
+                #roznica = obecna_data - data_urodzenia
+                #roznica_lata = roznica/365.25
+                #if 0 <= roznica_lata <= 5:
+                #    break
+                #elif roznica_lata < 0:
+                #    print("Twoje dziecko jeszcze się nie urodziło. Nie można utworzyć dziecka.")
+                #else:
+                #    print("Niniejszy program przeznaczony jest dla dzieci do 5 roku życia. Twoje dziecko jest starsze.")
                 break
             except ValueError:
                 data_urodzenia = input("Nieprawidłowa data. Upewnij się, że podajesz datę urodzenia w formacie DD-MM-RRRR:  ")
@@ -53,5 +64,14 @@ class Dziecko:
             print("Nie utworzyłeś jeszcze dziecka.")
 
     def wyswietl_dzieci(self):
-        return self.moje_dzieci
+        if self.moje_dzieci == []:
+            print("Nie utworzyłeś jeszcze żadnych dzieci.")
+        else:
+            for indeks, dziecko in enumerate(self.moje_dzieci, start=1):
+                print(f'''Dziecko {indeks}:
+                        Imię: {dziecko[0]}
+                        Płeć: {dziecko[1]}
+                        Data urodzenia: {dziecko[2]} \n''')
+        
+        
 
