@@ -1,4 +1,6 @@
 from dziecko import Dziecko
+from controller import Controller
+import sqlite3
 
 dziecko = Dziecko('d','d','d')
 
@@ -11,10 +13,9 @@ while True:
            Wybieram:        """)
     wybor = input()
     if wybor == "1":
-        dziecko.utwórz_dziecko()
-        dziecko.dodaj_dziecko()
+        Controller.utwórz_dziecko()
     elif wybor == "2":
-        dziecko.wyswietl_dzieci()
+        Controller.wyswietl_dzieci()
     elif wybor == "3":
         break
     else:
