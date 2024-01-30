@@ -3,7 +3,7 @@ import sqlite3
 class Dziecko:
     _table_name = "dzieci"
     _pomiary_table_name = "pomiary"
-    
+
     def __init__(self, id, imie, plec, data_urodzenia):
         self.id = id
         self.imie = imie
@@ -55,7 +55,7 @@ class Dziecko:
         conn.close()
 
         return children_list
-    
+
     @classmethod
     def get_by_id(cls, dziecko_id):
         conn = sqlite3.connect('children.db')

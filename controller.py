@@ -13,7 +13,7 @@ class Controller:
             plec = input("""Żle zdefiniowana płeć.
                          Wybierz płeć dziecka: Dz/Ch    """)
             plec = plec.lower()
-        
+
         data_urodzenia = input("Podaj datę urodzenia dziecka w formacie DD-MM-RRRR: ")
         while True:
             try:
@@ -27,7 +27,7 @@ class Controller:
                 break
             except ValueError:
                 data_urodzenia = input("Nieprawidłowa data. Upewnij się, że podajesz datę urodzenia w formacie DD-MM-RRRR:  ")
-        
+
         if plec == "dz":
             plec = 'dziewczynka'
         if plec == 'ch':
@@ -49,7 +49,7 @@ class Controller:
                 print("------------------")
                 dziecko.print_dziecko()
                 print("------------------")
-    
+
     @classmethod
     def rozszerzone_menu(cls):
         while True:
@@ -68,16 +68,40 @@ class Controller:
                 print("Nieprawidłowy wybór. Spróbuj jeszcze raz.")
 
     @classmethod
+    def podaj_wage(cls):
+        while True:
+            try:
+                user_input = input("Podaj wagę (kg): ")
+                waga = float(user_input)
+                if waga < 0:
+                    raise ValueError
+                return waga
+            except ValueError:
+                print("Nieprawidłowa wartość.")
+
+    @classmethod
+    def podaj_wzrost(cls):
+        while True:
+            try:
+                user_input = input("Podaj wzrost (cm): ")
+                wzrost = float(user_input)
+                if wzrost < 0:
+                    raise ValueError
+                return wzrost
+            except ValueError:
+                print("Nieprawidłowa wartość.")
+
+    @classmethod
     def dodaj_pomiar(cls):
         id = input("Podaj ID dziecka: ")
         if not Dziecko.exists_with_id(id):
             print("Dziecko o podanym ID nie istnieje!")
             return
-        
+
         data_urodzenia = datetime.strptime(Dziecko.get_by_id(id).data_urodzenia, '%d-%m-%Y')
 
-        waga = input("Podaj wagę (kg): ")
-        wzrost = input("Podaj wzrost (cm): ")
+        waga = Controller.podaj_wage()
+        wzrost = Controller.podaj_wzrost()
         data_pomiaru = input("Podaj datę pomiaru dziecka w formacie DD-MM-RRRR: ")
         while True:
             try:
@@ -102,7 +126,7 @@ class Controller:
         if not Dziecko.exists_with_id(id):
             print("Dziecko o podanym ID nie istnieje!")
             return
-        
+
         pomiary = Pomiar.get_all_for_dziecko(id)
         if len(pomiary) == 0:
             print(f"Brak pomiarów dla ID: {id}")
