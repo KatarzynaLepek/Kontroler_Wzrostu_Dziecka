@@ -1,6 +1,8 @@
 from dziecko import Dziecko
 from pomiar import Pomiar
 from datetime import datetime, timedelta
+from dateutil.relativedelta import relativedelta
+import wykres
 
 class Controller:
 
@@ -116,8 +118,11 @@ class Controller:
             except ValueError:
                 data_pomiaru = input("Nieprawidłowa data. Upewnij się, że podajesz datę urodzenia w formacie DD-MM-RRRR:  ")
 
+        delta = relativedelta(data_pomiaru, data_urodzenia)
+        delta = delta.years * 12 + delta.months
+
         data_pomiaru = data_pomiaru.strftime('%d-%m-%Y')
-        pomiar = Pomiar(id, data_pomiaru, wzrost, waga)
+        pomiar = Pomiar(id, data_pomiaru, wzrost, waga, delta)
         pomiar.save_to_db()
 
     @classmethod
@@ -128,9 +133,15 @@ class Controller:
             return
 
         pomiary = Pomiar.get_all_for_dziecko(id)
+        dziecko = Dziecko.get_by_id(id)
+
         if len(pomiary) == 0:
             print(f"Brak pomiarów dla ID: {id}")
+            return
 
         for pomiar in pomiary:
             pomiar.print_pomiar()
             print("------------------")
+
+        wykres.rysuj_procentyle_wzrostu(dziecko.plec, pomiary, dziecko.imie)
+        wykres.rysuj_procentyle_wagi(dziecko.plec, pomiary, dziecko.imie)
