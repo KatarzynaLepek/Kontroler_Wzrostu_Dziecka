@@ -1,5 +1,27 @@
 import matplotlib.pyplot as plt
+import pandas as pd
 import numpy as np
+
+def rysuj_tabele(pomiary, imie):
+    data = {
+        'Wiek': [pomiar.wiek_dziecka() for pomiar in pomiary],
+        'Waga (kg)': [pomiar.waga for pomiar in pomiary],
+        'Wzrost (cm)': [pomiar.wzrost for pomiar in pomiary],
+        'Data': [pomiar.data for pomiar in pomiary],
+    }
+
+    df = pd.DataFrame(data)
+
+    fig, ax = plt.subplots(figsize=(12, 4))
+    ax.axis('off')
+
+    table = ax.table(cellText=df.values, colLabels=df.columns, cellLoc='center', loc='center')
+    table.auto_set_font_size(False)
+    table.set_fontsize(12)
+    table.scale(1, 1.5) 
+
+    plt.title(imie, fontsize=14)
+    plt.show()
 
 def rysuj_procentyle_wzrostu(plec, pomiary, imie):
     fig, ax = plt.subplots(figsize=(12, 12))    

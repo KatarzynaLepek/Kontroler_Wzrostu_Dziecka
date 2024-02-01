@@ -5,4 +5,5 @@
 * `matplotlib`
 * `numpy`
 * `sqlite3`
+* `pandas`
 * `datetime`/`dateutil`

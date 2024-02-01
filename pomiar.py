@@ -1,4 +1,5 @@
 import sqlite3
+from dziecko import Dziecko
 
 class Pomiar:
     _table_name = "pomiary"
@@ -10,10 +11,20 @@ class Pomiar:
         self.waga = waga
         self.miesiace_zycia = miesiace_zycia
 
+    def wiek_dziecka(self):
+        lata = self.miesiace_zycia // 12
+        pozostale_miesiace = self.miesiace_zycia % 12
+
+        if lata > 0:
+            return f"{round(lata)} lat i {round(pozostale_miesiace)} miesięcy"
+        else:
+            return f"{round(pozostale_miesiace)} miesięcy"
+
     def print_pomiar(self):
         print(f"Waga: {self.waga} kg")
         print(f"Wzrost: {self.wzrost} cm")
         print(f"Data: {self.data}")
+        print(f"Wiek dziecka: {self.wiek_dziecka()}")
 
     @classmethod
     def create_table(cls):

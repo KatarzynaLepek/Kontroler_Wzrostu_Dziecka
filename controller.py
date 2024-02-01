@@ -143,5 +143,14 @@ class Controller:
             pomiar.print_pomiar()
             print("------------------")
 
-        wykres.rysuj_procentyle_wzrostu(dziecko.plec, pomiary, dziecko.imie)
-        wykres.rysuj_procentyle_wagi(dziecko.plec, pomiary, dziecko.imie)
+        decyzja = input("Czy chcesz wyświetlić wykres wzrostu? T/N: ")
+        if decyzja.lower() == "t":
+            wykres.rysuj_procentyle_wzrostu(dziecko.plec, pomiary, dziecko.imie)
+
+        decyzja = input("Czy chcesz wyświetlić wykres wagi? T/N: ")
+        if decyzja.lower() == "t":
+            wykres.rysuj_procentyle_wagi(dziecko.plec, pomiary, dziecko.imie)
+
+        decyzja = input(f"Czy chcesz wyświetlić zbiorczą tabelę dla {dziecko.imie}? T/N: ")
+        if decyzja.lower() == "t":
+            wykres.rysuj_tabele(pomiary, dziecko.imie)
