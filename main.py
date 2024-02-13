@@ -7,7 +7,7 @@ Pomiar.create_table()
 
 while True:
     print ("""\n Witaj w Kontrolerze Wzrostu Dziecka do lat 5!
-           Wybierz opcję z poniższego menu: 
+           Wybierz opcję z poniższego2 menu: 
                 1 - Dodaj dziecko
                 2 - Moje dzieci
                 3 - Wyjdź""")
